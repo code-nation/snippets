@@ -1,71 +1,79 @@
 {% if site.most_recent_blog_post_pages.size > 0 %}
 
 <style type="text/css">
-  .post-thumbnail {
-    height: 215px;
+  .latest-news-section {
+    background: mintcream;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    text-align: center;
   }
-  .post-button {
-    padding: 8px 10px 8px 25px;
+  .latest-news-section .headline {
+    padding-bottom: 10px;
+  }
+  .post-thumbnail {
+    width: 75%;
+    text-align: center;
+  }
+  .post-excerpt {
+    margin-bottom: 10px;
+  }
+  .small {
+    font-size: 12px;
+    margin-bottom: 0px;
   }
 </style>
 
 <section class="latest-news-section clearfix">
   <div class="container">
+
+    <h1 class="text-center headline">Latest News</h1>
+
     <div class="row">
-      <div class="col-md-12">
+      {% for post in site.most_recent_blog_post_pages | limit:3 %}
+        {% if forloop.first %}
+          {% assign main_blog = post.parent %}
+        {% endif %}
+        <div class="col-sm-4 padtop padbottom">
+          <div class="post-column">
 
-        <h1 class="text-center">Latest News</h1>
-
-        <div class="row">
-          {% for post in site.most_recent_blog_post_pages | limit:3 %}
-            {% if forloop.first %}
-              {% assign main_blog = post.parent %}
+            {% if post.has_meta_image? %}
+            <a href="{{ post.url }}">
+              <img src="{{ post.meta_image_url }}" title="{{ post.name }}" alt="{{ post.name }}" class="post-thumbnail" />
+            </a>
             {% endif %}
-            <div class="col-md-4">
-              <div class="post-column">
 
-                <a href="{{ post.url }}">
-                  {% if post.has_meta_image? %}
-                  <style type="text/css">
-                    #{{ post.slug }} {
-                      background: url('{{ post.meta_image_url }}') no-repeat top center scroll;
-                      -webkit-background-size: cover;
-                      -moz-background-size: cover;
-                      -o-background-size: cover;
-                      background-size: cover;
-                    }
-                  </style>
-                  <div class="post-thumbnail" title="{{ post.name }}" id="{{ post.slug }}">
-                  </div>
-                  {% endif %}
-                </a>
-
-                <div class="post-excerpt">
-                  {% if post.headline.size > 0 %}
-                  <a href="{{ post.url }}">
-                    <h4 class="bold">{{ post.headline }}</h4>
-                  </a>
-                  {% endif %}
-                  <div class="byline mid-grey">
-                    {{ post.published_at | date: '%B %d, %Y' }}
-                  </div>
-                </div>
-
-                <a href="{{ post.url }}" class="post-button">
-                  <p>View More</p>
-                </a>
-
-              </div>
+            <div class="padtopless">
+              {% if post.headline.size > 0 %}
+              <a href="{{ post.url }}">
+                <h4>
+                  <strong>{{ post.headline }}</strong>
+                </h4>
+              </a>
+              {% endif %}
+              <p class="small">
+                {{ post.published_at | date: '%B %d, %Y' }}
+              </p>
             </div>
-          {% endfor %}
-        </div>
 
-        <div class="text-center padtopmore">
-          <a href="{{ main_blog.url }}" class="submit-button btn-lg btn-default">Visit {{ main_blog.name }}</a>
-        </div>
+            {% if post.blog_post.content.size > 0 %}
+            <p class="post-excerpt padtopless">
+              {{ post.blog_post.content | strip_html | truncatewords:24 }}
+            </p>
+            {% endif %}
 
-      </div>
+            <div class="padtopless">
+              <a href="{{ post.url }}" class="btn btn-primary btn-xs">View More</a>
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
     </div>
+
+    <div class="text-center padtop margintopless">
+      <a href="{{ main_blog.url }}" class="btn-default btn-lg">Visit {{ main_blog.name }}</a>
+    </div>
+
   </div>
 </section>
 
