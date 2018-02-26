@@ -1,0 +1,37 @@
+{% form_for signup %}
+  <div class="form-errors">{% error_messages_for signup %}</div>
+  <div class="row">
+    <div class="{% if site.ask_for_mobiles? %}col-md-3{% else %}col-md-4{% endif %}">
+      <div class="form-group">
+        {% text_field "first_name", class:"text form-control" %}
+        <label for="signup_first_name">First Name</label>
+      </div>
+    </div>
+    <div class="{% if site.ask_for_mobiles? %}col-md-3{% else %}col-md-4{% endif %}">
+      <div class="form-group">
+        {% text_field "last_name", class:"text form-control" %}
+        <label for="signup_last_name">Last Name</label>
+      </div>
+    </div>
+    <div class="{% if site.ask_for_mobiles? %}col-md-3{% else %}col-md-4{% endif %}">
+      <div class="form-group">
+        {% email_field "email", class:"text form-control" %}
+        <label for="signup_email">Email</label>
+      </div>
+    </div>
+    {% if site.ask_for_mobiles? %}
+    <div class="col-md-3">
+      <div class="form-group">
+        {% phone_field "mobile_number", class:"text form-control" %}
+        <label for="signup_mobile_number">Mobile phone</label>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="text-center padtop">
+    {% submit_tag "Signup", class:"btn btn-default btn-lg" %}
+    <div class="padtopless">
+      <div class="form-submit"></div>
+    </div>
+  </div>
+{% endform_for %}
