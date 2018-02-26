@@ -1,0 +1,71 @@
+<section class="latest-news-section bg-light-grey clearfix">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12"><!--col-md-10 col-md-offset-1-->
+				<h1 class="title dark-blue bold center">Latest News</h1><!--padbottom30-->
+
+		  	<!-- assign ordered_posts = tag.most_recent_published_pages | sort:'published_at' | reverse -->
+		    <!-- for post in ordered_posts | limit:3 -->
+		    {% for post in site.blog.most_recent_blog_posts | limit:3 %}<!--| limit:6-->
+
+		    {% if forloop.first %}
+		    <div class="row">
+		    	{% assign main_blog = post.parent %}
+		    {% endif %}
+		      <div class="col-md-4">
+
+		      	<div class="post-column">
+			  			<a href="{{ post.url }}" class="dark-grey to-">
+		      			{% if post.has_meta_image? %}
+		  					<!--<img src="{{ post.meta_image_url }}" alt="{{ post.name }}">-->
+					      <style type="text/css">
+					        #{{ post.slug }} {
+					          background:url('{{ post.meta_image_url }}') no-repeat top center scroll;
+					          -webkit-background-size:cover;
+					          -moz-background-size:cover;
+					          -o-background-size:cover;
+					          background-size:cover;
+					        }
+					      </style>
+					      <div class="post-thumbnail" title="{{ post.name }}" id="{{ post.slug }}">
+					      </div>
+					      {% endif %}
+			  			</a>
+			          
+		          <div class="post-excerpt {% cycle 'column_1', 'column_2', 'column_3' %}">
+		  					{% if post.headline.size > 0 %}
+		  					<a href="{{ post.url }}" class="dark-grey to-">
+			  					<h4 class="bold">{{ post.headline }}</h4>
+		  					</a>
+		  					{% endif %}
+
+		  					<div class="byline mid-grey">
+					        {{ post.published_at | date: '%B %d, %Y' }}
+					      </div>
+			  			</div>
+
+			  			<a href="{{ post.url }}" class="post-button"><!--submit-button btn-->
+			  				<p>View More</p>
+
+			  				<span class="fa-stack circle-button">
+									<i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i><!--cherry-->
+									<i class="fa fa-plus fa-stack-1x white" aria-hidden="true"></i>
+								</span>
+			  			</a>
+			  		</div>
+			  		
+		  		</div>
+		  	{% if forloop.last %}
+		    </div>
+		    {% endif %}
+
+		    {% endfor %}
+
+		    <div class="button-wrap center padtopmore">
+		    	<a href="{{ main_blog.url }}" class="submit-button btn-lg btn-longer">View More</a>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</section>
+{% endfor %}
