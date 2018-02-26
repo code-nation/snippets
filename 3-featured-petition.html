@@ -1,0 +1,50 @@
+<style type="text/css">
+	.featured-petition-panel {
+		background: #ebe9e5;
+		padding-top: 60px;
+		padding-bottom: 100px;
+	}
+</style>
+
+{% subpage "YOUR_PETITION_PAGE_SLUG" with "action_page_partial" %}
+
+<section class="featured-petition-panel">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        {% if action_page.headline.size > 0 %}
+        <h2 class="headline">{{ action_page.headline }}</h2>
+        {% endif %}
+        {% if action_page.intro.size > 0 %}
+        <div class="intro">
+          {{ action_page.petition.intro }}
+        </div>
+        {% endif %}
+        {% if action_page.petition.content.size > 0 %}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="view_petition_content">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Read the petition content &nbsp; <i class="fa fa-chevron-down"></i>
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="view_petition_content">
+              <div class="panel-body">
+                {{ action_page.petition.content }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+      	<div class="form-wrap">
+      		<div class="form">
+      			{% subpage action_page.slug with "petition_form" %}
+      		</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</section>
