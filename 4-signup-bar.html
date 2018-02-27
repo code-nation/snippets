@@ -14,6 +14,7 @@
     {% if request.sorta_logged_in? or request.logged_in? %}
 
       <h1 class="text-center">Thanks for joining!</h1>
+      {% subpage site.signup_page.slug with "horizontal_signup_form" %}
 
     {% else %}
 

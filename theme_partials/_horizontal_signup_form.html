@@ -29,7 +29,11 @@
     {% endif %}
   </div>
   <div class="text-center padtop">
-    {% submit_tag "Signup", class:"btn btn-default btn-lg" %}
+    {% if request.sorta_logged_in? or request.logged_in? %}
+      {% submit_tag "Update my info", class:"btn btn-default btn-lg" %}
+    {% else %}
+      {% submit_tag "Signup", class:"btn btn-default btn-lg" %}
+    {% endif %}
     <div class="padtopless">
       <div class="form-submit"></div>
     </div>
