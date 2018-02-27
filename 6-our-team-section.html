@@ -1,0 +1,68 @@
+{% if page.children.size > 0 %}
+
+<style type="text/css">
+  .latest-news-section {
+    background: mintcream;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  .latest-news-section .headline {
+    padding-bottom: 10px;
+  }
+  .post-thumbnail {
+    width: 75%;
+    text-align: center;
+    //border-radius: 50%
+  }
+  .post-excerpt {
+    margin-bottom: 10px;
+  }
+  .small {
+    font-size: 12px;
+    margin-bottom: 0px;
+  }
+</style>
+
+<section class="latest-news-section clearfix">
+  <div class="container">
+    <h1 class="text-center headline">Our team</h1>
+    {% assign child_number = 1 %}
+    {% for post in page.children %}
+      {% if child_number == 1 %}
+      <div class="row">
+      {% endif %}
+        <div class="col-sm-4 padtop padbottom">
+          <div class="post-column">
+            {% if child.has_meta_image? %}
+            <a href="{{ child.url }}">
+              <img src="{{ child.meta_image_url }}" title="{{ child.name }}" alt="{{ child.name }}" class="post-thumbnail" />
+            </a>
+            {% endif %}
+            <div class="padtopless">
+              {% if child.headline.size > 0 %}
+              <a href="{{ child.url }}">
+                <h4>
+                  <strong>{{ child.headline }}</strong>
+                </h4>
+              </a>
+              {% endif %}
+            </div>
+            {% if child[child.type_slug].content.size > 0 %}
+            <div class="post-excerpt padtopless">
+              {{ child[child.type_slug].content }}
+            </div>
+            {% endif %}
+          </div>
+        {% if child_number == 3 or forloop.last %}
+        {% assign child_number = 1 %}
+        </div>
+        {% else %}
+        {% assign child_number = child_number | plus:1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endif %}
