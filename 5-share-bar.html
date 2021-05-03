@@ -1,17 +1,39 @@
-<div class="container center">
-  <h2 class="headline padtopmore">Help increase our impact!</h2>
-  <div class="padbottom">
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url | url_encode }}" target="facebookPopup" onclick="window.open(this.href, 'facebookPopup', 'left=40,top=40,height=320,width=500,toolbar=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes'); return false;">
-      <div class="btn btn-primary" style="background-color: #306199">
-        <i class="fa fa-2x fa-facebook"></i>
-        <span style="font-size:20px"> &nbsp; Share</span>
-      </div>
-    </a>
-    <a href="http://twitter.com/share?url={{ page.full_url | url_encode }}&text={{ page.default_face_tweet_text | url_encode }}" target="twitterPopup" onclick="window.open(this.href, 'twitterPopup', 'left=40,top=40,height=320,width=500,toolbar=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes'); return false;">
-      <div class="btn btn-primary" style="background-color: #26c4f1;">
-        <i class="fa fa-2x fa-twitter"></i>
-        <span style="font-size:20px"> &nbsp; Tweet</span>
-      </div>
-    </a>
+<!-- NOTE: this will show Facebook and Twitter buttons to share the page -->
+
+<style type="text/css">
+  .social-share-section {
+    background: wheat;
+    padding-top: 60px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  .share-button-text {
+    font-size: 20px;
+  }
+  .button-facebook {
+    background-color: #306199;
+  }
+  .button-twitter {
+    background-color: #26c4f1;
+  }
+</style>
+
+<div class="social-share-section">
+  <div class="container">
+    <h2 class="headline padtopmore">Help increase our impact!</h2>
+    <div class="padbottom">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url | url_encode }}" target="facebookPopup" onclick="window.open(this.href, 'facebookPopup', 'left=40,top=40,height=320,width=500,toolbar=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes'); return false;">
+        <div class="btn btn-primary btn-facebook">
+          <i class="fa fa-2x fa-facebook"></i>
+          <span class="share-button-text"> &nbsp; Share</span>
+        </div>
+      </a>
+      <a href="http://twitter.com/share?url={{ page.full_url | url_encode }}&text={{ page.default_face_tweet_text | url_encode }}" target="twitterPopup" onclick="window.open(this.href, 'twitterPopup', 'left=40,top=40,height=320,width=500,toolbar=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes'); return false;">
+        <div class="btn btn-primary btn-twitter">
+          <i class="fa fa-2x fa-twitter"></i>
+          <span class="share-button-text"> &nbsp; Tweet</span>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
