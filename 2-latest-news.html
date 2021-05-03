@@ -1,4 +1,6 @@
-{% if site.most_recent_blog_post_pages.size > 0 %}
+<!-- NOTE: this will show the latest posts from the primary site in the nation -->
+
+{% if settings.site.most_recent_blog_post_pages.size > 0 %}
 
 <style type="text/css">
   .latest-news-section {
@@ -10,16 +12,32 @@
   .latest-news-section .headline {
     padding-bottom: 10px;
   }
+  .post-column {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   .post-thumbnail {
     width: 75%;
     text-align: center;
   }
+  .post-headline {
+    margin-top: 15px;
+  }
   .post-excerpt {
+    padding-top: 5px;
+    margin-bottom: 10px;
+  }
+  .post-view-more {
+    padding-top: 10px;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
   .small {
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 0px;
+  }
+  .view-all-posts-link {
+    margin-top: 30px;
   }
 </style>
 
@@ -29,7 +47,7 @@
     <h1 class="text-center headline">Latest News</h1>
 
     <div class="row">
-      {% for post in site.most_recent_blog_post_pages | limit:3 %}
+      {% for post in settings.site.most_recent_blog_post_pages | limit:3 %}
         {% if forloop.first %}
           {% assign main_blog = post.parent %}
         {% endif %}
@@ -42,13 +60,13 @@
             </a>
             {% endif %}
 
-            <div class="padtopless">
+            <div class="post-content">
               {% if post.headline.size > 0 %}
-              <a href="{{ post.url }}">
-                <h4>
+              <h4 class="post-headline">
+                <a href="{{ post.url }}">
                   <strong>{{ post.headline }}</strong>
-                </h4>
-              </a>
+                </a>
+              </h4>
               {% endif %}
               <p class="small">
                 {{ post.published_at | date: '%B %d, %Y' }}
@@ -56,12 +74,12 @@
             </div>
 
             {% if post.blog_post.content.size > 0 %}
-            <p class="post-excerpt padtopless">
+            <p class="post-excerpt">
               {{ post.blog_post.content | strip_html | truncatewords:24 }}
             </p>
             {% endif %}
 
-            <div class="padtopless">
+            <div class="post-view-more">
               <a href="{{ post.url }}" class="btn btn-primary btn-xs">View More</a>
             </div>
 
@@ -69,8 +87,8 @@
         </div>
       {% endfor %}
     </div>
-    <div class="text-center padtop margintopless">
-      <a href="{{ main_blog.url }}" class="btn-default btn-lg">Visit {{ main_blog.name }}</a>
+    <div class="text-center view-all-posts-link">
+      <a href="{{ main_blog.url }}" class="btn-secondary btn-lg">View all posts</a>
     </div>
   </div>
 </section>
