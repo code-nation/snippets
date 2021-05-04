@@ -6,6 +6,10 @@
     padding-top: 40px;
     padding-bottom: 40px;
   }
+  .headline {
+    text-align: center;
+    padding-bottom: 10px;
+  }
 </style>
 
 <section class="signup-bar clearfix">
@@ -13,16 +17,24 @@
 
     {% if request.sorta_logged_in? or request.logged_in? %}
 
-      <h1 class="text-center">Thanks for joining!</h1>
+      <h1 class="headline">Thanks for joining!</h1>
       {% subpage site.signup_page.slug with "horizontal_signup_form" %}
 
     {% else %}
 
-      <h1 class="text-center padbottom">Sign up for updates!</h1>
+      <h1 class="headline">Sign up for updates!</h1>
       {% subpage site.signup_page.slug with "horizontal_signup_form" %}
 
     {% endif %}
 
+  </div>
+</section>
+
+{% else %}
+
+<section class="signup-bar clearfix">
+  <div class="container">
+    <h2 class="text-center">Please add a signup page <a href="{{ site.admin_dashboard_url | replace:site.admin_new_subpage_url | split:'?' | first }}" target="_blank">here</a> so the code can show a form in this section</h2>
   </div>
 </section>
 
