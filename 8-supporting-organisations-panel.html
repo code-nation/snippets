@@ -1,3 +1,12 @@
+<!-- This snippet shows the supporting org logos 
+1. Copy and paste this snippet into you custom page template
+2. Create a subpage for each supporting organisation
+3. Upload the supporting org logo into the files section of the subpage
+
+Note: the default logo is rectangle. If you have a square logo include the word "square" in the filename
+
+-->
+
 {% for child in tag.most_recent_published_pages | limit:1 %}
   <div class="container">
     {% assign page_attachments = child.attachments | sort:'file_name' %}
