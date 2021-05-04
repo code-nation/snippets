@@ -1,0 +1,38 @@
+{% for child in tag.most_recent_published_pages | limit:1 %}
+  <div class="container">
+    {% assign page_attachments = child.attachments | sort:'file_name' %}
+    {% for attachment in page_attachments %}
+      {% capture filename %}{{ attachment.file_name | downcase }}{% endcapture %}
+
+      {% if forloop.first == true %}
+      <div class="row center pt-3 my-4 justify-content-center">
+        <div class="col-md-12 mb-2">
+          <h1 class="text-center headline">{{ child.headline }}</h1>
+        </div>
+      {% endif %}
+
+        <div class="pt-3 fade-scroll col-xs-2">
+          <img src="{{ attachment.url }}" class="supporter-logo {% if filename contains 'square' %}square{% else %}rectangle{% endif %}">
+        </div>
+
+      {% if forloop.last == true %}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+
+<style type="text/css">
+  .supporter-logo {
+    width: 150px;
+    height: 100px;
+  }
+  .supporter-logo.square {
+    padding-left:25px;
+    padding-right:25px;
+  }
+  .supporter-logo.rectangle {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+</style>
