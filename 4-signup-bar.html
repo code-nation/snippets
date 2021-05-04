@@ -1,5 +1,3 @@
-{% if site.has_signup_page? %}
-
 <style type="text/css">
   .signup-bar {
     background: lightblue;
@@ -11,6 +9,8 @@
     padding-bottom: 10px;
   }
 </style>
+
+{% if site.has_signup_page? %}
 
 <section class="signup-bar clearfix">
   <div class="container">
@@ -34,7 +34,7 @@
 
 <section class="signup-bar clearfix">
   <div class="container">
-    <h2 class="text-center">Please add a signup page <a href="{{ site.admin_dashboard_url | replace:site.admin_new_subpage_url | split:'?' | first }}" target="_blank">here</a> so the code can show a form in this section</h2>
+    <h2 class="text-center">Please add a signup page <a href="{{ site.homepage.admin_new_subpage_url | split:'?' | first | append:'?type_name=Signup' }}" target="_blank">here</a> to show a form in this section</h2>
   </div>
 </section>
 
