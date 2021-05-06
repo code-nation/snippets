@@ -1,0 +1,48 @@
+<section id="show-profile-{{ page.slug }}" class="clearfix">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 pt-3">
+        <h3 class="text-center text-primary pb-3 font-weight-bold">Our team</h3>
+        {% assign subpage_number = 0 %}
+        {% for child in page.children %}
+          {% include "partial_assign_data_edit_attribute" edit_url: child.admin_edit_url, btn_text: "Edit this profile", full_width: "false" %}
+          {% assign subpage_number = subpage_number | plus:1 %}
+          {% if subpage_number == 1 %}
+          <div class="row">
+          {% endif %}
+            <div class="col-md-4 mb-5" {{ data_edit_attribute }}>
+              <div class="item-thumbnail mb-3 text-center">
+                <div class="px-md-2">
+                  {% if child.has_meta_image? %}
+                    {% assign thumbnail_url = child.meta_image_url %}
+                  {% else %}
+                    {% capture default_image_name %}{% cycle 'default-image-1.jpg', 'default-image-2.jpg', 'default-image-3.jpg' %}{% endcapture %}
+                    {% assign thumbnail_url = theme[default_image_name] %}
+                  {% endif %}
+                  <img src="{{ thumbnail_url }}" alt="{{ child.name }}" class="rounded-circle" />
+                </div>
+              </div>
+              <div class="item-content">
+                {% if child.headline contains "- " %}
+                  <h5 class="text-center text-black mb-0">{{ child.headline | split:"- " | first | strip }}</h5>
+                  <h5 class="text-center text-black">{{ child.headline | split:"- " | last | strip }}</h5>
+                {% elsif child.headline.size > 0 %}
+                  <h5 class="text-center text-black">{{ child.headline }}</h5>
+                {% endif %}
+                {% if child[child.type_slug].content.size > 0 %}
+                  <div class="py-1">
+                    {{ child[child.type_slug].content | strip_html }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% if subpage_number == 3 or forloop.last %}
+          </div>
+          {% assign subpage_number = 0 %}
+          {% endif %}
+        {% endfor %}
+      <!--<hr />-->
+      </div>
+    </div>
+  </div>
+</section>
